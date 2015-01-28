@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_delete"
+        android:icon="@drawable/operation_button_delete"
+        android:title="@string/operation_delete"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_send"
+        android:icon="@drawable/operation_button_send"
+        android:title="@string/operation_send"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/action_cancel"
+        android:icon="@drawable/operation_button_cancel"
+        android:title="@string/operation_cancel"
+        app:showAsAction="ifRoom"/>
+</menu>
+
+<!--
+<item android:id="@+id/action_copy"
+android:icon="@drawable/operation_button_copy"
+android:title="@string/operation_copy"
+app:showAsAction="ifRoom" />-->
