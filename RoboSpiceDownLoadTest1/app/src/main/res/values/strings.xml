@@ -47,6 +47,7 @@
     <string name="operation_copy_path">copy path</string>
     <string name="filenotexist">File not existed</string>
     <string name="failure">Failure</string>
+    <string name="pauseall">pauseall</string>
 
 
 </resources>

@@ -37,6 +37,7 @@ public class TaskOperationHub {
         DeleteListener listener=new DeleteListener(mContext);
         spiceManager.execute(request,listener);
     }
+
     public void ShareResult(List<DownLoadTask> tasks)
     {
         Intent intent=IntentBuilder.buildSendFile(tasks);

@@ -39,7 +39,6 @@ public class MyBinaryRequest extends SpiceRequest<InputStream> {
     private File cacheFile;
     private DownLoadTask task;
     private LocalBroadcastManager manager;
-    private Context mContext;
     private HttpURLConnection httpURLConnection;
 
     private boolean isPaused;
@@ -50,7 +49,6 @@ public class MyBinaryRequest extends SpiceRequest<InputStream> {
         this.task=task;
         this.url = task.getURL();
         this.cacheFile=task.getFile();
-        this.mContext=context;
         manager=LocalBroadcastManager.getInstance(context);
         isContinue=false;
     }

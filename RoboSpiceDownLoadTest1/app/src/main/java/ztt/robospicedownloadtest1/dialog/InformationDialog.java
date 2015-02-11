@@ -4,14 +4,11 @@ package ztt.robospicedownloadtest1.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
-import java.io.File;
+
 
 import ztt.robospicedownloadtest1.R;
 import ztt.robospicedownloadtest1.Utils;

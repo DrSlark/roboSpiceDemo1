@@ -2,36 +2,34 @@ package ztt.robospicedownloadtest1;
 
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.view.ViewConfiguration;
+import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import android.widget.Toast;
 
 import com.octo.android.robospice.SpiceManager;
 
 import java.io.File;
-import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import ztt.robospicedownloadtest1.adapter.TaskListAdapter;
 import ztt.robospicedownloadtest1.dialog.InformationDialog;
@@ -39,7 +37,6 @@ import ztt.robospicedownloadtest1.model.DownLoadTask;
 import ztt.robospicedownloadtest1.model.DownLoadTaskList;
 import ztt.robospicedownloadtest1.request.MyBinaryRequest;
 import ztt.robospicedownloadtest1.service.DownLoadService;
-import ztt.robospicedownloadtest1.service.NotificationService;
 import ztt.robospicedownloadtest1.taskoperation.TaskOperationHub;
 
 
@@ -95,6 +92,7 @@ public class MainActivity extends ActionBarActivity {
             bar.setDisplayUseLogoEnabled(false);
             bar.setDisplayShowTitleEnabled(false);
         }
+        setOverflowButtonAlways();
         Tasks= DownLoadTaskList.getInstance(this);
         taskListAdapter= new TaskListAdapter(this,R.layout.downloading_task_list_item,
                 Tasks,spiceManager);
@@ -106,6 +104,37 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void setOverflowButtonAlways() {
+        ViewConfiguration config=ViewConfiguration.get(this);
+        Field menuKey;
+        try {
+            menuKey=ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            menuKey.setAccessible(true);
+            menuKey.setBoolean(config,false);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if(featureId== Window.FEATURE_ACTION_BAR&&menu!=null)
+        {
+            if(menu.getClass().getSimpleName().equals("MenuBuilder"))
+            {
+                try {
+                    Method m=menu.getClass().getDeclaredMethod("setOptionalIconsVisible",Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu,true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
 
     private void initDir()
     {
